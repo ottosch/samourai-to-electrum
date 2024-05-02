@@ -4,7 +4,7 @@ If you have lost your passphrase, but still got your wallet in the Samourai Wall
 
 Note: if you have your seed words + passphrase, you can easily restore it on [Sparrow Wallet](https://sparrowwallet.com). Refer to the [Sparrow Telegram group](https://t.me/sparrowwallet) and/or the [Samourai Telegram group](https://t.me/SamouraiWallet).  
 
-**Beware**: there are many scammers pretending to be admins and tech support fooling people in direct messages and stealing funds. Do not reply to DMs!!  
+**Beware: there are many scammers pretending to be admins and tech support fooling people in direct messages and stealing funds. DO NOT REPLY TO DMs!!**  
 
 ## Step 1: get xpub
 
@@ -21,7 +21,8 @@ Go to Tools > Wallet address calculator and select the same **Address Type** as 
 
 ## Step 3: find the xprv
 
-Now, download the files of this project. For your own safety, make sure you run it on a computer that is offline and/or you trust!  
+Now, download the files of this project. You can download them all, but the only required files are **index.html** and **bundle.js**.  
+For your own safety, make sure you run it on a computer that is offline and/or you trust!  
 
 Fill the xpub and private key fields with the values from steps 1 and 2, then click **Find xprv**. If you copied the right values, your xprv will be displayed.
 
