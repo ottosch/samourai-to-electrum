@@ -1,0 +1,22 @@
+{
+  "name": "xpub-privates",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "watch": "watchify ./index.js -o ./bundle.js -v",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "ottosch",
+  "license": "ISC",
+  "dependencies": {
+    "@bitcoinerlab/secp256k1": "1.1.1",
+    "bip32": "4.0.0",
+    "bitcoinjs-lib": "6.1.5",
+    "ecpair": "2.1.0"
+  },
+  "devDependencies": {
+    "browserify": "17.0.0",
+    "watchify": "4.0.0"
+  }
+}

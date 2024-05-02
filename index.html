@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Samourai recover xprv</title>
+    <style>
+        body {
+            background-color: #888;
+        }
+    </style>
+</head>
+
+<body style="background-color: #888;">
+    <div>
+        <label for="xpub">Xpub:</label><br />
+        <input id="xpub" type="text" placeholder="xpub, ypub, zpub" size="150" /><br /><br />
+    </div>
+    <div>
+        <label for="wif">Private Key:</label><br />
+        <input id="wif" type="text" placeholder="private key in WIF format" size="150" /><br /><br />
+    </div>
+    <div>
+        <button id="go">Find xprv</button> <button id="clear">Clear</button>
+    </div>
+
+    <div id="result" style="padding: 20px;"></div>
+
+    <script src="./bundle.js"></script>
+</body>
+
+</html>
