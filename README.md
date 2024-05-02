@@ -26,6 +26,8 @@ For your own safety, make sure you run it on a computer that is offline and/or y
 
 Fill the xpub and private key fields with the values from steps 1 and 2, then click **Find xprv**. If you copied the right values, your xprv will be displayed.
 
+![find xprv](img/found.png)
+
 ## Step 4: use the xprv on Electrum
 
 Open Electrum and create a new wallet. Choose **Standard Wallet** and **Use a master private key**:
