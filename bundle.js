@@ -14,20 +14,24 @@ initEccLib(ecc);
 const testnet = networks.testnet;
 const mainnet = networks.bitcoin;
 const prefixes = new Map([
-	['tpub', { bip32: { public: 0x043587CF, private: 0x04358394 }, network: testnet }],
-	['vpub', { bip32: { public: 0x045f1cf6, private: 0x045f18bc }, network: testnet }],
-	['upub', { bip32: { public: 0x044a5262, private: 0x044a4e28 }, network: testnet }],
-	['xpub', { bip32: { public: 0x0488B21E, private: 0x0488ADE4 }, network: mainnet }],
-	['ypub', { bip32: { public: 0x049d7cb2, private: 0x049d7878 }, network: mainnet }],
-	['zpub', { bip32: { public: 0x04b24746, private: 0x04b2430c }, network: mainnet }],
+	['tpub', { bip32: { public: 0x043587CF, private: 0x04358394 }, network: testnet, descOpen: 'pkh(', descClose: ')' }],
+	['upub', { bip32: { public: 0x044a5262, private: 0x044a4e28 }, network: testnet, descOpen: 'sh(wpkh(', descClose: '))' }],
+	['vpub', { bip32: { public: 0x045f1cf6, private: 0x045f18bc }, network: testnet, descOpen: 'wpkh(', descClose: ')' }],
+	['xpub', { bip32: { public: 0x0488B21E, private: 0x0488ADE4 }, network: mainnet, descOpen: 'pkh(', descClose: ')' }],
+	['ypub', { bip32: { public: 0x049d7cb2, private: 0x049d7878 }, network: mainnet, descOpen: 'sh(wpkh(', descClose: '))' }],
+	['zpub', { bip32: { public: 0x04b24746, private: 0x04b2430c }, network: mainnet, descOpen: 'wpkh(', descClose: ')' }],
 ]);
+
+const sparrow = 'sparrow';
+const electrum = 'electrum';
+const err = 'err';
 
 document.querySelector('#go').addEventListener('click', () => {
 	const xpubStr = document.querySelector('#xpub').value;
 	const wif = document.querySelector('#wif').value;
 	
 	if (!xpubStr || !wif) {
-		print('Invalid input');
+		print(err, 'Invalid input');
 		return;
 	}
 
@@ -77,7 +81,7 @@ document.querySelector('#go').addEventListener('click', () => {
 
 	if (!privFound) {
 		console.log('not found');
-		print('Data does not match. Either this private key is not part of this xpub or it\'s too deep');
+		print(err, 'Data does not match. Either this private key is not part of this xpub or it\'s too deep');
 		return;
 	}
 
@@ -99,23 +103,33 @@ document.querySelector('#go').addEventListener('click', () => {
 
 	let parentXprv = bip32.fromPrivateKey(calcBuffer, xpub.chainCode, network);
 	console.log(parentXprv.toBase58());
-	print(parentXprv.toBase58());
+	print(electrum, parentXprv.toBase58());
 
+	let stdXprv = bip32.fromPrivateKey(parentXprv.privateKey, parentXprv.chainCode, prefix.network); // use standard xprv
+	console.log(stdXprv.toBase58());
+
+	let str = stdXprv.toBase58();
+	let output = `${prefix.descOpen}${str}/0/*${prefix.descClose}`;
+	console.log(output);
+	print(sparrow, output);
 });
 
 document.querySelector('#clear').addEventListener('click', () => {
 	document.querySelector('#xpub').value = '';
 	document.querySelector('#wif').value = '';
+	document.querySelector('#electrum').innerHTML = '';
+	document.querySelector('#sparrow').innerHTML = '';
+	document.querySelector('#err').innerHTML = '';
 });
 
-const print = (msg) => {
-	const result = document.querySelector('#result');
-	result.innerHTML = '';
+const print = (area, msg) => {
+	const outputArea = document.querySelector(`#${area}`);
+	outputArea.innerHTML = '';
 	const span = document.createElement('span');
 	span.style.border = '5px dotted black';
 	span.style.padding = '5px';
 	span.innerHTML = msg;
-	result.append(span);
+	outputArea.append(span);
 };
 }).call(this)}).call(this,require("buffer").Buffer)
 },{"@bitcoinerlab/secp256k1":2,"bip32":65,"bitcoinjs-lib":73,"buffer":145,"crypto":154,"ecpair":167}],2:[function(require,module,exports){
